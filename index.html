@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fina - Your Personal Life Management App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transform: scale(1.1);
+        }
+        
+        .feature-card:hover .feature-icon i {
+            color: white !important;
+        }
+        
+        .platform-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-blur {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="nav-blur fixed top-0 w-full z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 hero-gradient rounded-xl flex items-center justify-center floating">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold text-gray-800">Fina</span>
+                        <p class="text-xs text-gray-500">by <span class="text-blue-600 font-semibold">A1</span></p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition font-medium">Home</a>
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition font-medium">Features</a>
+                    <a href="#access" class="text-gray-700 hover:text-blue-600 transition font-medium">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
+        <div class="container mx-auto text-center relative z-10">
+            <div class="max-w-5xl mx-auto slide-in">
+                <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full mb-6">
+                    <i class="fas fa-sparkles mr-2"></i>
+                    <span class="text-sm font-semibold">New Version Available</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight">
+                    Transform Your Life with <span class="text-gradient">Fina</span>
+                </h1>
+                
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    The ultimate personal life management app that seamlessly integrates your journal, diary, financials, reminders, habits, and calendar into one beautiful, intelligent ecosystem.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                    <a href="#access" class="btn-primary text-white px-8 py-4 rounded-2xl font-semibold text-lg inline-flex items-center justify-center">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Get Started Now
+                    </a>
+                    <a href="#features" class="bg-white text-blue-600 border-2 border-blue-600 px-8 py-4 rounded-2xl font-semibold text-lg inline-flex items-center justify-center hover:bg-blue-50 transition">
+                        <i class="fas fa-play-circle mr-2"></i>
+                        Watch Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 bg-white/50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Everything You Need in One Place</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Powerful features designed to help you manage every aspect of your life with ease and style.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-2xl p-8 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-book-open text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Smart Journal</h3>
+                    <p class="text-gray-600 mb-4">Capture your daily thoughts with AI-powered insights and mood tracking.</p>
+                    <div class="flex items-center text-blue-600 font-semibold">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-lock text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Private Diary</h3>
+                    <p class="text-gray-600 mb-4">Keep your innermost thoughts secure with military-grade encryption.</p>
+                    <div class="flex items-center text-blue-600 font-semibold">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-pie text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Financial Analytics</h3>
+                    <p class="text-gray-600 mb-4">Track expenses, set budgets, and achieve your financial goals with detailed insights.</p>
+                    <div class="flex items-center text-blue-600 font-semibold">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bell text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Smart Reminders</h3>
+                    <p class="text-gray-600 mb-4">Never miss important events with intelligent notifications and scheduling.</p>
+                    <div class="flex items-center text-blue-600 font-semibold">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-repeat text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Habit Tracker</h3>
+                    <p class="text-gray-600 mb-4">Build positive habits with streak tracking, progress visualization, and motivational insights.</p>
+                    <div class="flex items-center text-blue-600 font-semibold">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 card-hover">
+                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-calendar text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Integrated Calendar</h3>
+                    <p class="text-gray-600 mb-4">Organize your life with a powerful calendar that syncs across all your devices.</p>
+                    <div class="flex items-center text-blue-600 font-semibold">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access Section -->
+    <section id="access" class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Choose Your Platform</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Experience Fina on your preferred device with seamless synchronization.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Web App Option -->
+                <div class="platform-card rounded-2xl p-8 text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 floating">
+                        <i class="fas fa-globe text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Web App</h3>
+                    <p class="text-gray-600 mb-6">Access Fina instantly from any browser. No installation required, always up-to-date.</p>
+                    <ul class="text-left text-sm text-gray-600 mb-6 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Instant access</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Auto-updates</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Cross-platform</li>
+                    </ul>
+                    <button onclick="launchWebApp()" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold inline-block w-full">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        Launch Web App
+                    </button>
+                </div>
+                
+                <!-- Mobile APK Option -->
+                <div class="platform-card rounded-2xl p-8 text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 floating" style="animation-delay: 0.2s;">
+                        <i class="fas fa-mobile-alt text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Mobile App</h3>
+                    <p class="text-gray-600 mb-6">Native Android experience with offline capabilities and push notifications.</p>
+                    <ul class="text-left text-sm text-gray-600 mb-6 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Offline mode</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Push notifications</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Native performance</li>
+                    </ul>
+                    <a href="/Fina/app-debug.apk" download class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold inline-block w-full transition">
+                        <i class="fas fa-download mr-2"></i>
+                        Download APK
+                    </a>
+                </div>
+                
+                <!-- Desktop EXE Option -->
+                <div class="platform-card rounded-2xl p-8 text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 floating" style="animation-delay: 0.4s;">
+                        <i class="fas fa-desktop text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Desktop App</h3>
+                    <p class="text-gray-600 mb-6">Full-featured Windows application with enhanced productivity tools.</p>
+                    <ul class="text-left text-sm text-gray-600 mb-6 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Full offline access</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>System integration</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Enhanced features</li>
+                    </ul>
+                    <a href="/Fina/Fina 0.0.0.exe" download class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl font-semibold inline-block w-full transition">
+                        <i class="fas fa-download mr-2"></i>
+                        Download EXE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold">Fina</span>
+                    </div>
+                    <p class="text-gray-400 mb-2">Your personal life management companion</p>
+                    <p class="text-sm text-gray-500">Created with <span class="text-red-500">by <span class="font-bold text-blue-400">A1</span></span></p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end space-y-6">
+                    <div class="flex space-x-6">
+                        <a href="https://github.com/AJ-2608/Fina" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-500">© 2024 A1. All rights reserved.</p>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Privacy</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Terms</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Launch Web App Function
+        function launchWebApp() {
+            // Open web app in new tab with GitHub Pages URL
+            window.open('/Fina/web-app/', '_blank');
+        }
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-2xl');
+            } else {
+                nav.classList.remove('shadow-2xl');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('slide-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('#home');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
